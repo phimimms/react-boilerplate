@@ -7,7 +7,7 @@
         "build": "babel-node util/build.js",
         "build:html": "babel-node util/build-html.js",
         "postbuild": "babel-node src/server/server.prod.js",
-        "clean-dist": "node_modules/.bin/rimraf ./src/client/dist && mkdir src/client/dist",
+        "clean-dist": "rimraf src/client/dist && mkdir \"src/client/dist\"",
         "dev": "babel-node src/server/server.dev.js",
         "lint": "eslint src"
     },

@@ -1,12 +1,12 @@
-const bodyParser = require('body-parser');
-const express = require('express');
-const open = require('open');
-const path = require('path');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+import bodyParser from 'body-parser';
+import express from 'express';
+import open from 'open';
+import path from 'path';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
-const getWebpackConfig = require('../../webpack.config');
+import getWebpackConfig from '../../webpack.config';
 
 const app = express();
 const config = getWebpackConfig();

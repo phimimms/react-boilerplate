@@ -1,8 +1,8 @@
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const express = require('express');
-const open = require('open');
-const path = require('path');
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import express from 'express';
+import open from 'open';
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
