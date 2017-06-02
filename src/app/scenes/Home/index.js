@@ -2,8 +2,8 @@ import React from 'react';
 
 import './styles.scss';
 
-export default function Landing() {
+export default function Home() {
     return (
-        <div className="Landing" />
+        <div className="Home" />
     );
 }

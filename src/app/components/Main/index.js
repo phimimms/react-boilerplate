@@ -3,14 +3,14 @@ import { asyncComponent } from 'react-async-component';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 export default function Main() {
-    const Landing = asyncComponent({
-        resolve: () => import('scenes/Landing'),
+    const Home = asyncComponent({
+        resolve: () => import('scenes/Home'),
     });
 
     return (
         <BrowserRouter>
             <Switch>
-                <Route component={Landing} />
+                <Route component={Home} />
             </Switch>
         </BrowserRouter>
     );
