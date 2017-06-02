@@ -1,11 +1,13 @@
-const webpack = require('webpack');
+import webpack from 'webpack';
 
-const getWebpackConfig = require('../webpack.config');
+import getWebpackConfig from '../webpack.config';
 
+/* Sets Production Environment */
 process.env.NODE_ENV = 'production';
 
 console.log('Generating minified bundle for production...');
 
+/* Builds Production Application */
 webpack(getWebpackConfig()).run((err, stats) => {
     if (err) {
         console.log(err);
@@ -22,8 +24,6 @@ webpack(getWebpackConfig()).run((err, stats) => {
         console.log('Webpack generated the following warnings:');
         jsonStats.warnings.map(warning => console.log(warning));
     }
-
-    console.log(`Webpack stats: ${stats}`);
 
     return 0;
 });

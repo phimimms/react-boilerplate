@@ -1,7 +1,12 @@
 html,
 body,
-#app {
+#root {
     height: 100%;
     margin: 0;
+    width:  100%;
+}
+
+.App {
+    height: 100%;
     width:  100%;
 }

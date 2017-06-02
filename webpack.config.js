@@ -1,8 +1,9 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = () => {
+module.exports = function getWebpackConfig() {
     const dev = (process.env.NODE_ENV !== 'production');
 
     const extractSass = new ExtractTextPlugin({
@@ -11,7 +12,15 @@ module.exports = () => {
     });
 
     return {
-        devtool: dev ? 'cheap-module-eval-source-map' : 'source-map',
+        devServer: {
+            compress: true,
+            historyApiFallback: true,
+            hot: true,
+            port: 3000,
+            stats: 'errors-only',
+        },
+
+        devtool: dev ? 'inline-source-map' : 'hidden-source-map',
 
         entry: getEntry(dev),
 
@@ -32,7 +41,7 @@ module.exports = () => {
         },
 
         output: {
-            filename: 'bundle.js',
+            filename: '[name].[hash].js',
             path: path.join(__dirname, 'src/client/dist'),
             publicPath: '/',
         },
@@ -52,27 +61,41 @@ module.exports = () => {
 };
 
 function getEntry(dev) {
-    const entry = [];
+    const middlewares = [];
 
     if (dev) {
-        entry.push(
-            'react-hot-loader/patch',
-            'webpack-hot-middleware/client',
+        middlewares.push(
+            'react-hot-loader/patch'
         );
     }
 
-    entry.push('./src/client/index');
-
-    return entry;
+    return {
+        app: [...middlewares, './src/client/index'],
+        vendor: [
+            'prop-types', 'react', 'react-async-component', 'react-dom',
+            'react-redux', 'react-router-dom', 'redux', 'redux-localstorage', 'redux-thunk',
+        ],
+    };
 }
 
 function getPlugins(dev) {
-    const plugins = [];
+    const plugins = [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: '[name].[hash].js',
+            minChunks: Infinity,
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            inject: 'body',
+            template: path.join(__dirname, 'src/client/index.html'),
+        }),
+    ];
 
     if (dev) {
         plugins.push(
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoEmitOnErrorsPlugin(),
+            new webpack.NoEmitOnErrorsPlugin()
         );
     } else {
         plugins.push(
@@ -81,7 +104,7 @@ function getPlugins(dev) {
                     NODE_ENV: JSON.stringify('production'),
                 },
             }),
-            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.UglifyJsPlugin()
         );
     }
 
