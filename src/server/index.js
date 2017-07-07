@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const express = require('express');
-const open = require('open');
 const path = require('path');
 
 const app = express();
@@ -26,8 +25,6 @@ app.get('*', (req, res) => {
 app.listen(port, (err) => {
     if (err) {
         console.log(err);
-        return;
     }
-
-    open(`http://localhost:${port}`);
+    console.log(`Listening to http://localhost:${port}`);
 });

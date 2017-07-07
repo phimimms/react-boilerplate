@@ -1,16 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { asyncComponent } from 'react-async-component';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 
-import Main from 'components/Main';
+import { history } from 'store/configureStore';
 
 import './styles.scss';
 
 const App = ({ directionality }) => {
+    const Home = asyncComponent({
+        resolve: () => import('scenes/Home'),
+    });
+
     return (
-        <div className="App" dir={directionality}>
-            <Main />
-        </div>
+        <ConnectedRouter history={history}>
+            <div className="App" dir={directionality}>
+                <Route exact path="/" component={Home} />
+            </div>
+        </ConnectedRouter>
     );
 };
 

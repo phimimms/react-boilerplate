@@ -1,8 +1,12 @@
+import createHistory from 'history/createBrowserHistory'; // eslint-disable-line
 import { applyMiddleware, compose, createStore } from 'redux';
 import persistState from 'redux-localstorage';
+import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 
 import createReducer from './rootReducer';
+
+export const history = createHistory();
 
 export default function configureStore(initialState = {}) {
     /* The Root Reducer */
@@ -14,12 +18,13 @@ export default function configureStore(initialState = {}) {
     ];
 
     const middlewares = [
+        routerMiddleware(history),
         thunkMiddleware,
     ];
 
     if (process.env.NODE_ENV !== 'production') {
+        /* Enables Redux DevTools Browser Extension */
         enhancements.push(
-            /* Enables Redux DevTools Browser Extension */
             window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
         );
 
