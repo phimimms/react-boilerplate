@@ -6,9 +6,9 @@
  */
 function createActionType(type) {
     return {
-        [`${type}_FAILURE`]: `${type}_FAILURE`,
-        [`${type}_REQUEST`]: `${type}_REQUEST`,
-        [`${type}_SUCCESS`]: `${type}_SUCCESS`,
+        FAILURE: `${type}_FAILURE`,
+        REQUEST: `${type}_REQUEST`,
+        SUCCESS: `${type}_SUCCESS`,
     };
 }
 
