@@ -1,13 +1,13 @@
-import { UPDATE_LANGUAGE_FAIL, UPDATE_LANGUAGE_SUCCESS } from 'actions/actionTypes';
+import { UPDATE_LANGUAGE } from 'actions/actionTypes';
 import initialState from 'store/initialState';
 import { getApplicationTokens, getLanguageDirectionality } from 'util/localization';
 
 export default function localizationReducer(state = initialState.localization, action) {
     switch (action.type) {
-        case UPDATE_LANGUAGE_FAIL:
+        case UPDATE_LANGUAGE.FAILURE:
             console.warn(`Unsupported language: ${action.languageCode}`);
             return state;
-        case UPDATE_LANGUAGE_SUCCESS:
+        case UPDATE_LANGUAGE.SUCCESS:
             return updateLocalizationState(action.languageCode);
         default:
             return state;

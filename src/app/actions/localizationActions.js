@@ -1,6 +1,6 @@
 import { supportedLanguages } from 'dictionary/language';
 
-import { UPDATE_LANGUAGE_FAIL, UPDATE_LANGUAGE_SUCCESS } from './actionTypes';
+import { UPDATE_LANGUAGE } from './actionTypes';
 
 /**
  * Updates the application language to the language corresponding to the given code
@@ -20,8 +20,8 @@ export function updateLanguage(languageCode) {
     };
 }
 function updateLanguageFail(languageCode) {
-    return { type: UPDATE_LANGUAGE_FAIL, languageCode };
+    return { type: UPDATE_LANGUAGE.FAILURE, languageCode };
 }
 function updateLanguageSuccess(languageCode) {
-    return { type: UPDATE_LANGUAGE_SUCCESS, languageCode };
+    return { type: UPDATE_LANGUAGE.SUCCESS, languageCode };
 }
